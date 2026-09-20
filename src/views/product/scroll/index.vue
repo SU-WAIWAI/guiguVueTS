@@ -1,14 +1,14 @@
 <template>
   <el-card>
     <div class="whole-page">
-      <Vue3SeamlessScroll :list="list" :limitScrollNum="5" :hover="true" :step="0.5" :copyNum="1" :wheel="true"
+      <component :is="Vue3SeamlessScroll" :list="scrollOptions.list" :hover="scrollOptions.hover" :step="scrollOptions.step" :wheel="scrollOptions.wheel"
         :isWatch="true" class="scroll">
-        <div v-for="item in list" :key="item" class="list-box">
+        <div v-for="item in list" :key="item.id" class="list-box">
           <div class="item">
             {{ item.name }}
           </div>
         </div>
-      </Vue3SeamlessScroll>
+      </component>
     </div>
   </el-card>
 </template>
@@ -25,6 +25,12 @@ const list = ref([
   { id: '06', name: '放假啊咖啡机啊咖啡机啊发卡机6' },
   { id: '07', name: '放假啊咖啡机啊咖啡机啊发卡机7' },
 ])
+const scrollOptions = {
+  list: () => list.value,
+  hover: () => true,
+  step: () => 0.5,
+  wheel: () => true,
+}
 </script>
 
 <style scoped lang="scss">

@@ -2,17 +2,17 @@ import request from '@/utils/request'
 import type { RoleResponseData, RoleData, MenuResponseData } from './type'
 
 enum API {
-  ALLROLE_URL = '/admin/acl/role/',
+  ALLROLE_URL = '/admin/acl/role',
   ADDROLE_URL = '/admin/acl/role/save',
   UPDATEROLE_URL = '/admin/acl/role/update',
   ALLPERMISSION_URL = '/admin/acl/permission/toAssign/',
-  SETPERMISSION_URL = '/admin/acl/permission/doAssign/?',
+  SETPERMISSION_URL = '/admin/acl/permission/doAssign?',
   REMOVEROLE_URL = '/admin/acl/role/remove/',
 }
 
 export const reqAllRoleList = (page: number, limit: number, roleName: string) =>
   request.get<any, RoleResponseData>(
-    API.ALLROLE_URL + `${page}/${limit}/?roleName=${roleName}`,
+    API.ALLROLE_URL + `/${page}/${limit}?roleName=${roleName}`,
   )
 
 export const reqAddOrUpdateRole = (data: RoleData) => {

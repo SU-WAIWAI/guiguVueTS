@@ -22,14 +22,7 @@
 <script setup lang="ts">
 import Breadcrumb from './breadcrumb/index.vue'
 import Setting from './setting/index.vue'
-import { ref } from 'vue'
-import useLayoutSettingStore from '@/store/modules/setting.ts'
-//获取layout
-let LayoutSettingStore = useLayoutSettingStore()
 
-function changeIcon() {
-  LayoutSettingStore.fold = !LayoutSettingStore.fold
-}
 </script>
 <script lang="ts">
 export default {

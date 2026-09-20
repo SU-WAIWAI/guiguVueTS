@@ -3,18 +3,40 @@
     <el-row :gutter="10">
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form" ref="loginForms" :model="loginForm" :rules="rules">
+        <el-form
+          class="login_form"
+          ref="loginForms"
+          :model="loginForm"
+          :rules="rules"
+        >
           <h1>hello</h1>
           <h2>欢迎来到九亿少女的梦</h2>
           <el-form-item prop="username">
-            <el-input :prefix-icon="User" v-model="loginForm.username" placeholder="请输入用户名"></el-input>
+            <el-input
+              :prefix-icon="User"
+              v-model="loginForm.username"
+              placeholder="请输入用户名"
+            ></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" show-password :prefix-icon="Lock" v-model="loginForm.password"
-              placeholder="请输入密码"></el-input>
+            <el-input
+              type="password"
+              show-password
+              :prefix-icon="Lock"
+              v-model="loginForm.password"
+              placeholder="请输入密码"
+            ></el-input>
           </el-form-item>
           <el-form-item label="">
-            <el-button @click="login" :loading="loading" class="login_btn" type="primary">登录</el-button></el-form-item>
+            <el-button
+              @click="login"
+              :loading="loading"
+              class="login_btn"
+              type="primary"
+            >
+              登录
+            </el-button>
+          </el-form-item>
         </el-form>
       </el-col>
     </el-row>
@@ -55,14 +77,14 @@ const login = async () => {
     ElNotification({
       type: 'success',
       message: '登录成功',
-      title: "HI," + message + '好'
+      title: 'HI,' + message + '好',
     })
   } catch (error) {
     // loading.value = false
     // 登录失败的提示信息
     ElNotification({
       type: 'error',
-      message: (error as Error).message
+      message: (error as Error).message,
     })
   } finally {
     //成功与否都要关闭loading
@@ -75,32 +97,30 @@ const validatorUsername = (rule: any, value: any, callback: any) => {
   //value：即为表单元素文本内容
   // 函数：如果符合条件callBack方法通过
   // 如果不符合条件callBack方法，注入错误提示信息
-  if (value.length > 4) {
+  if (value.length > 2) {
     callback()
   } else {
-    callback(new Error('长度至少为4位'))
+    callback(new Error('长度至少为2位'))
   }
 }
 const validatorPassword = (rule: any, value: any, callback: any) => {
-  if (value.length > 4) {
+  if (value.length > 2) {
     callback()
   } else {
-    callback(new Error('长度至少为4位'))
+    callback(new Error('长度至少为2位'))
   }
 }
 //表单校验
 const rules = {
   username: [
     // {required:true,message:'用户名不能为空',trigger:"blur"}
-    { trigger: 'change', validator: validatorUsername }
-
+    { trigger: 'change', validator: validatorUsername },
   ],
   password: [
     // {required:true,message:'密码不能为空',trigger:"blur"}
-    { validator: validatorPassword, trigger: 'blur' }
-  ]
+    { validator: validatorPassword, trigger: 'blur' },
+  ],
 }
-
 </script>
 
 <style scoped lang="scss">

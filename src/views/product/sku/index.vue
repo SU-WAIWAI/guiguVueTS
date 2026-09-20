@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import {
   reqSkuList,
   reqSaleSku,
   reqCancelSale,
   reqSkuInfo,
   reqRemoveSku,
+  reqUpdateSku,
 } from '@/api/product/sku'
 import type {
   SkuData,
@@ -20,6 +21,8 @@ let total = ref(0)
 let skuArr = ref<SkuData[]>([])
 let drawer = ref<boolean>(false)
 let skuInfo = ref<any>({})
+let editVisible = ref(false)
+let skuForm = reactive<SkuData>({})
 onMounted(() => {
   getHasSku()
 })
@@ -56,8 +59,18 @@ const updateSale = async (row: SkuData) => {
   }
 }
 
-const updateSku = () => {
-  ElMessage({ type: 'info', message: '程序员在努力的更新中...' })
+const updateSku = (row: SkuData) => {
+  Object.assign(skuForm, JSON.parse(JSON.stringify(row)))
+  editVisible.value = true
+}
+
+const saveSku = async () => {
+  const res = await reqUpdateSku(skuForm)
+  if (res.code === 200) {
+    editVisible.value = false
+    ElMessage({ type: 'success', message: 'SKU 修改成功' })
+    getHasSku(pageNo.value)
+  }
 }
 
 const findSku = async (row: SkuData) => {
@@ -92,7 +105,7 @@ const removeSku = async (id: number) => {
       <el-table-column label="操作" fixed="right" width="450px">
         <template #="{ row, $index }">
           <el-button size="small" :icon="row.isSale === 1 ? 'Bottom' : 'Top'" @click="updateSale(row)"></el-button>
-          <el-button type="primary" size="small" icon="Edit" @click="updateSku"></el-button>
+          <el-button type="primary" size="small" icon="Edit" @click="updateSku(row)"></el-button>
           <el-button type="info" size="small" icon="InfoFilled" @click="findSku(row)"></el-button>
           <el-popconfirm :title="`你确定要删除${row.skuName}`" width="200px" @confirm="removeSku(row.id)">
             <template #reference>
@@ -150,6 +163,19 @@ const removeSku = async (id: number) => {
         </el-row>
       </template>
     </el-drawer>
+    <el-dialog v-model="editVisible" title="编辑 SKU" width="520px">
+      <el-form label-width="90px">
+        <el-form-item label="SKU 名称"><el-input v-model="skuForm.skuName" /></el-form-item>
+        <el-form-item label="描述"><el-input v-model="skuForm.skuDesc" type="textarea" /></el-form-item>
+        <el-form-item label="价格"><el-input v-model="skuForm.price" type="number" /></el-form-item>
+        <el-form-item label="重量(g)"><el-input v-model="skuForm.weight" type="number" /></el-form-item>
+        <el-form-item label="图片地址"><el-input v-model="skuForm.skuDefaultImg" /></el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="editVisible = false">取消</el-button>
+        <el-button type="primary" @click="saveSku">保存</el-button>
+      </template>
+    </el-dialog>
   </el-card>
 </template>
 <style lang="scss" scoped>

@@ -1,4 +1,3 @@
-import { DELETE_ATTR } from './../attr/index'
 import request from '@/utils/request'
 import type {
   HasSpuResponseData,

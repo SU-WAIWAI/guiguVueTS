@@ -50,6 +50,7 @@ let useUserStore = defineStore('User',{
       if(result.code === 200){
         this.username = result.data.name
         this.avatar = result.data.avatar
+        this.buttons = result.data.buttons || []
         return 'ok'
       }else{
           return Promise.reject(new Error(result.message))
@@ -63,6 +64,7 @@ let useUserStore = defineStore('User',{
       this.token = ''
       this.username = ''
       this.avatar = ''
+      this.buttons = []
       REMOVE_TOKEN()
      }else{
       return Promise.reject(new Error(result.message))

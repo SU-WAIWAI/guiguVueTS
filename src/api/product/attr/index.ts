@@ -1,13 +1,12 @@
 import request from '@/utils/request'
-import type { ResponseData,AttrResponseData,Attr,CategoryObj,CategoryResponseData } from './type'
-import useCategoryState from '@/store/modules/category'
+import type { ResponseData,AttrResponseData,Attr } from './type'
 
 enum API {
   GET_ATTR_INFO = '/admin/product/attrInfoList',
   GET_Category_one = '/admin/product/getCategory1',
   GET_Category_two = '/admin/product/getCategory2',
   GET_Category_three = '/admin/product/getCategory3',
-  DELETE_ATTR = '/admin/product/deleteAttr',
+  DELETE_ATTR = '/admin/product/deleteAttr/',
   SAVE_ATTR = '/admin/product/saveAttrInfo',
 }
 

@@ -11,6 +11,7 @@ import type {
   Permission,
   MenuParams,
 } from '@/api/acl/menu/type'
+import { ElMessage } from 'element-plus'
 
 let PermissionArr = ref<PermissionList>([])
 let dialogVisible = ref<boolean>(false)
@@ -67,6 +68,7 @@ const removeMenu = async (id: number) => {
   let res = await reqRemoveMenu(id)
   if (res.code === 200) {
     ElMessage({ type: 'success', message: '删除成功' })
+    getHasPermission()
   }
 }
 </script>

@@ -19,6 +19,7 @@ import {
   reqAddOrUpdateSpu,
 } from '@/api/product/spu'
 import { ref, computed, nextTick } from 'vue'
+import { ElMessage } from 'element-plus'
 let $emit = defineEmits(['changeScene'])
 let saleAttrIdAndValueName = ref<string>('')
 const cancel = () => {

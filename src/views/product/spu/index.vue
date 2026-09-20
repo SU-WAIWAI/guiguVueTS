@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount } from 'vue'
 import useCategoryStore from '@/store/modules/category'
-import { reqHasSpu, reqSkuList } from '@/api/product/spu'
+import { reqHasSpu, reqSkuList, reqRemoveSpu } from '@/api/product/spu'
 import type {
   HasSpuResponseData,
   Records,
@@ -10,8 +10,7 @@ import type {
 } from '@/api/product/spu/type'
 import SpuForm from './components/spuForm.vue'
 import SkuForm from './components/skuForm.vue'
-import { SkuData } from '@/api/product/spu/type'
-import { DELETE_ATTR } from '@/api/product/attr'
+import type { SkuData } from '@/api/product/spu/type'
 import { ElMessage } from 'element-plus'
 
 let categoryStore = useCategoryStore()
@@ -101,7 +100,7 @@ const findSku = async (row: SpuData) => {
 }
 
 const deleteSpu = async (row: SpuData) => {
-  let res: any = await DELETE_ATTR(row.id as number)
+  let res: any = await reqRemoveSpu(row.id as number)
 
   if (res.code === 200) {
     ElMessage({

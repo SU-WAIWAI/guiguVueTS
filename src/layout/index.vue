@@ -23,7 +23,7 @@ const route = useRoute()
   <div class="layout_container">
     <!-- 左侧菜单 -->
     <div class="layout_slider" :class="{ fold: settingStore.fold }">
-      <Logo />
+      <Logo :fold="settingStore.fold" />
       <!-- 滚动条 -->
       <el-scrollbar class="scrollbar">
         <el-menu
@@ -38,7 +38,7 @@ const route = useRoute()
     </div>
     <!-- 顶部导航 -->
     <div class="layout_tabbar" :class="{ fold: settingStore.fold }">
-      <Tabbar />
+      <Tabbar :fold="settingStore.fold" />
     </div>
     <!-- 内容展示区域 -->
     <div class="layout_main" :class="{ fold: settingStore.fold }">

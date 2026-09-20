@@ -37,6 +37,5 @@ app.use(gloalComponent)
 //注册模板路由
 app.use(router)
 app.use(pinia)
-app.use(ElementPlus)
 
 app.mount('#app')

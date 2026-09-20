@@ -14,6 +14,7 @@ import type {
   MenuResponseData,
   MenuList,
 } from '@/api/acl/role/type'
+import { ElMessage } from 'element-plus'
 import useLayOutSettingStore from '@/store/modules/setting'
 let pageNo = ref<number>(1)
 
@@ -155,7 +156,7 @@ const handler = async () => {
       type: 'success',
       message: '分配权限成功',
     })
-    window.location.reload()
+    selectArr.value = permissionId
   }
 }
 

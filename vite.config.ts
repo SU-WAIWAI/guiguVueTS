@@ -18,7 +18,7 @@ export default defineConfig(({command,mode})=>{
       symbolId:'icon-[dir]-[name]'
     }),
     viteMockServe({
-      enable: command === 'serve',
+      enable: command === 'serve' && env.VITE_USE_MOCK === 'true',
     }),
   ],
   resolve:{

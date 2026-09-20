@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { saveOrUpdateAttr } from '@/api/product/attr'
+import { GET_ATTR_INFO } from '@/api/product/attr'
 import {
   reqSpuImageList,
   reqSpuHasSaleAttr,
   reqAddSku,
 } from '@/api/product/spu'
 import { ref, reactive } from 'vue'
+import { ElMessage } from 'element-plus'
 import type { SkuData } from '@/api/product/spu/type'
 let $emit = defineEmits(['changeScene'])
 let attrArr = ref<any>([])
@@ -60,7 +61,7 @@ const initSkuData = async (
   skuParams.skuSaleAttrValueList = []
   skuParams.skuDefaultImg = ''
 
-  let res: any = await saveOrUpdateAttr(categoryIdOne, categoryIdTwo, spu.category3Id)
+  let res: any = await GET_ATTR_INFO(Number(categoryIdOne), Number(categoryIdTwo), Number(spu.category3Id))
   let res1: any = await reqSpuHasSaleAttr(spu.id)
   let res2: any = await reqSpuImageList(spu.id)
 

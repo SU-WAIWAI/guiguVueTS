@@ -7,18 +7,18 @@ import type {
 } from './type'
 
 enum API {
-  ALLUSER_URL = '/api/acl/user/',
-  ADDUSER_URL = '/api/acl/user/save',
-  UPDATEUSER_URL = '/api/acl/user/update',
-  ALLROLEURL = '/api/acl/user/toAssign/',
-  SETROLE_url = '/api/acl/user/doAssignRole',
-  DELETEUSER_URL = '/api/acl/user/remove/',
-  DELETEALLUSER_URL = '/api/acl/user/batchRemove',
+  ALLUSER_URL = '/admin/acl/user/',
+  ADDUSER_URL = '/admin/acl/user/save',
+  UPDATEUSER_URL = '/admin/acl/user/update',
+  ALLROLEURL = '/admin/acl/user/toAssign/',
+  SETROLE_url = '/admin/acl/user/doAssignRole',
+  DELETEUSER_URL = '/admin/acl/user/remove/',
+  DELETEALLUSER_URL = '/admin/acl/user/batchRemove',
 }
 
 export const reqUserInfo = (page: number, limit: number, username: string) =>
   request.get<any, UserResponseData>(
-    API.ALLUSER_URL + `${page}/${limit}/?username=${username}`,
+    API.ALLUSER_URL + `${page}/${limit}?username=${encodeURIComponent(username)}`,
   )
 
 export const reqAddOrUpdateUser = (data: User) => {

@@ -1,11 +1,12 @@
 import request from '@/utils/request'
-import type { SkuResponseData, SkuInfoData } from './type'
+import type { SkuResponseData, SkuInfoData, SkuData } from './type'
 enum API {
   SKU_URL = '/admin/product/list/',
   SALE_URL = '/admin/product/onSale/',
   CANCELSALE_URL = '/admin/product/cancelSale/',
   SKUINFO_URL = '/admin/product/getSkuInfo/',
   DELETESKU_URL = '/admin/product/deleteSku/',
+  UPDATESKU_URL = '/admin/product/updateSkuInfo',
 }
 
 export const reqSkuList = (page: number, limit: number) =>
@@ -22,3 +23,6 @@ export const reqSkuInfo = (skuId: number) =>
 
 export const reqRemoveSku = (skuId: number) =>
   request.delete<any, any>(API.DELETESKU_URL + skuId)
+
+export const reqUpdateSku = (data: SkuData) =>
+  request.put<any, any>(API.UPDATESKU_URL, data)

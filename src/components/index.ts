@@ -3,6 +3,8 @@ import Pagination from '../components/Pagination/index.vue'
 import Category from '../components/Category/index.vue'
 // 引入element-plus提供全部图标组件
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import pinia from '@/store'
+import useUserStore from '@/store/modules/user'
 
 //全局对象
 const allGlobalComponent:any = {SvgIcon,Pagination,Category}
@@ -20,5 +22,13 @@ export default {
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
       app.component(key, component)
     }
+    app.directive('has', {
+      mounted(el: HTMLElement, binding: { value: string }) {
+        const { buttons } = useUserStore(pinia)
+        if (binding.value && !buttons.includes(binding.value)) {
+          el.parentNode?.removeChild(el)
+        }
+      },
+    })
   }
 }

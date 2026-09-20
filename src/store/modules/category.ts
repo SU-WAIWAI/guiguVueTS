@@ -2,11 +2,11 @@
 import { defineStore } from 'pinia'
 import {GET_Category_one,GET_Category_two,GET_Category_three,GET_ATTR_INFO} from '@/api/product/attr'
 import { ref } from 'vue'
-import type { ResponseData,CategoryObj,CategoryResponseData } from '@/apiproduct/attr/type'
+import type { Attr, AttrResponseData, CategoryObj, CategoryResponseData } from '@/api/product/attr/type'
 
 
 interface itemInfo{
-  id:number,
+  id:number | string,
   name:string
 }
 
@@ -21,7 +21,7 @@ let useCategoryState =  defineStore('category',{
       categoryIdTwo:ref<any>(null),
       categoryIdThree:ref<any>(null),
 
-      tableData:[]
+      tableData: [] as Attr[],
     }
   },
   actions:{
@@ -42,7 +42,7 @@ let useCategoryState =  defineStore('category',{
     },
      // 获取二级分类数据
     async getTableDataList(){
-     let res:CategoryResponseData = await GET_ATTR_INFO(this.categoryIdOne,this.categoryIdTwo,this.categoryIdThree)
+     const res: AttrResponseData = await GET_ATTR_INFO(Number(this.categoryIdOne), Number(this.categoryIdTwo), Number(this.categoryIdThree))
      this.tableData = res.data
     }
 

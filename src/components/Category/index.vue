@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts" name="">
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import useCategoryState from '../../store/modules/category'
 
 let categoryState = useCategoryState()
