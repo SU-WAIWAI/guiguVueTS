@@ -3,8 +3,7 @@ function createUserList() {
   return [
     {
       userId: 1,
-      avatar:
-        'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      avatar: '/logo.png',
       username: 'admin',
       password: '123456',
       desc: '平台管理员',
@@ -15,8 +14,7 @@ function createUserList() {
     },
     {
       userId: 2,
-      avatar:
-        'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      avatar: '/logo.png',
       username: 'system',
       password: '123456',
       desc: '系统管理员',

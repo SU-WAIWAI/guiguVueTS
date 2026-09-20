@@ -1,6 +1,6 @@
 //用于项目logo标题
 export default {
-  title:'九亿少女的梦',
+  title:'Nova Admin 管理平台',
   logo:'/logo.png',
   logoHidden:true,
 }

@@ -1,11 +1,4 @@
-/*
- * @Description: Stay hungry，Stay foolish
- * @Author: Huccct
- * @Date: 2023-05-18 12:11:32
- * @LastEditors: Huccct
- * @LastEditTime: 2023-05-23 14:53:42
- */
-// 二次封装axios
+// Axios request client with shared authentication and error handling.
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'

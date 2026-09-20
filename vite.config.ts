@@ -10,6 +10,7 @@ import {viteMockServe} from 'vite-plugin-mock'
 export default defineConfig(({command,mode})=>{
   //获取各种环境下对应的变量
  let env = loadEnv(mode,process.cwd())
+ const useMock = command === 'serve' && env.VITE_USE_MOCK === 'true'
  return {
   plugins: [
     vue(),
@@ -18,7 +19,7 @@ export default defineConfig(({command,mode})=>{
       symbolId:'icon-[dir]-[name]'
     }),
     viteMockServe({
-      enable: command === 'serve' && env.VITE_USE_MOCK === 'true',
+      enable: useMock,
     }),
   ],
   resolve:{
@@ -35,18 +36,17 @@ export default defineConfig(({command,mode})=>{
       },
     },
   },
-  //代理跨域
-  server:{
-    proxy:{
-      [env.VITE_APP_BASE_API]:{
-        //获取数据的服务器地址设置
-        target:env.VITE_SERVE,
-        // 需要代理跨域
-        changeOrigin:true,
-        // 路径重写
-        rewrite:(path) => path.replace(/^\/api/,'')
-      }
-    }
-  }
+  // Mock 模式不需要代理；接入真实后端时复用 /api 前缀。
+  server: useMock
+    ? {}
+    : {
+        proxy: {
+          [env.VITE_APP_BASE_API]: {
+            target: env.VITE_SERVE,
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, ''),
+          },
+        },
+      },
  }
 })

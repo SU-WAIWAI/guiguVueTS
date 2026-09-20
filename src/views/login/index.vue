@@ -9,8 +9,8 @@
           :model="loginForm"
           :rules="rules"
         >
-          <h1>hello</h1>
-          <h2>欢迎来到九亿少女的梦</h2>
+          <h1>Nova Admin</h1>
+          <h2>后台管理平台</h2>
           <el-form-item prop="username">
             <el-input
               :prefix-icon="User"

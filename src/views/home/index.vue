@@ -125,7 +125,7 @@ function initPieChart() {
           {{ getTime() }}好~
           <span class="gradient">{{ userStore.username }}</span>
         </h3>
-        <p class="subtitle">Vue-Admin</p>
+        <p class="subtitle">Nova Admin</p>
       </div>
     </div>
   </el-card> -->
